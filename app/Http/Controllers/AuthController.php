@@ -42,7 +42,17 @@ class AuthController extends Controller
                 'error' => 'The provided credentials are not correct'
             ], 422);
         }
+
+        /** @var \App\Models\User $user */
         $user = Auth::user();
+
+        if ($user->is_admin == 0) {
+            Auth::logout();
+            return response([
+                'message' => 'You do not have permission to access this page'
+            ], 403);
+        }
+
         $token = $user->createToken('main')->plainTextToken;
 
         return response([
