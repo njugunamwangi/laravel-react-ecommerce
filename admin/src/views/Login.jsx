@@ -33,7 +33,11 @@ export default function Login() {
             })
             .catch((error) => {
                 setLoading(false)
-                showError(error.response.data.error)
+                if (error.response.status === 403) {
+                    showError(error.response.data.message)
+                } else if (error.response.status === 422) {
+                    showError(error.response.data.error)
+                }
             })
     }
     return (
