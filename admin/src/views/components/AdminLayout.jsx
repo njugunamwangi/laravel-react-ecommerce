@@ -1,13 +1,16 @@
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider.jsx";
-import {Fragment, useEffect} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import axiosClient from "../../axios.js";
+import Loading from "./core/Loading.jsx";
 
 const navigation = [
     { name: 'Dashboard', to: '/' },
     { name: 'Users', to: '/users'},
+    { name: 'Products', to: '/products'},
+    { name: 'Reports', to: '/reports'},
 ]
 const userNavigation = [
     { name: 'Your Profile', to: '/profile' },
@@ -21,13 +24,17 @@ function classNames(...classes) {
 export default function AdminLayout() {
     const { user, setUser, token, setToken } = useStateContext()
 
+    const [ loading, setLoading ] = useState(false)
+
     const onSignOut = (ev) => {
         ev.preventDefault()
+        setLoading(true)
 
         axiosClient.post('/logout')
             .then(() => {
                 setUser({})
                 setToken(null)
+                setLoading(false)
             })
     }
 
@@ -212,7 +219,17 @@ export default function AdminLayout() {
                     )}
                 </Disclosure>
 
-                <Outlet />
+                {
+                    loading && (
+                        <Loading />
+                    )
+                }
+
+                {
+                    !loading && (
+                        <Outlet />
+                    )
+                }
             </div>
         </>
     )

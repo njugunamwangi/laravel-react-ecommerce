@@ -1,4 +1,4 @@
-import TwelveDotsScaleRotate from 'react-svg-spinners'
+import  {GoeeyBallsOne} from 'react-svg-spinners'
 
 export default function Loading() {
     return (
@@ -6,7 +6,7 @@ export default function Loading() {
             <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
                 <div className="text-center">
                     <p className="text-base">
-                        <TwelveDotsScaleRotate />
+                        <GoeeyBallsOne />
                     </p>
                 </div>
             </main>
