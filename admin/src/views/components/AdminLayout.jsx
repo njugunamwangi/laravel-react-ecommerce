@@ -11,6 +11,7 @@ const navigation = [
     { name: 'Users', to: '/users'},
     { name: 'Products', to: '/products'},
     { name: 'Reports', to: '/reports'},
+    { name: 'Categories', to: '/categories'},
 ]
 const userNavigation = [
     { name: 'Your Profile', to: '/profile' },
