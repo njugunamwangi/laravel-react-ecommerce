@@ -1,4 +1,4 @@
-## Laravel Portfolio
+## Laravel E-Commerce
 
 Built with
 
