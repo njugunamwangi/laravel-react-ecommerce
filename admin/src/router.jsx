@@ -8,6 +8,8 @@ import AdminLayout from "./views/components/AdminLayout.jsx";
 import Dashboard from "./views/Dashboard.jsx";
 import Profile from "./views/user/Profile.jsx";
 import Settings from "./views/user/Settings.jsx";
+import ResetPassword from "./views/ResetPassword.jsx";
+import RequestPassword from "./views/RequestPassword.jsx";
 
 const router = createBrowserRouter([
     {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <Signup />
             },
+            {
+                path: '/reset-password',
+                element: <ResetPassword />
+            },
+            {
+                path: '/request-new-password',
+                element: <RequestPassword />
+            }
         ]
     },
     {
