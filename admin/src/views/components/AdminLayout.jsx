@@ -5,6 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import axiosClient from "../../axios.js";
 import Loading from "./core/Loading.jsx";
+import Toast from "./core/Toast.jsx";
 
 const navigation = [
     { name: 'Dashboard', to: '/' },
@@ -228,7 +229,11 @@ export default function AdminLayout() {
 
                 {
                     !loading && (
-                        <Outlet />
+                        <>
+                            <Outlet />
+
+                            <Toast />
+                        </>
                     )
                 }
             </div>
