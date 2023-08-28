@@ -7,6 +7,10 @@ import Loading from "./components/core/Loading.jsx";
 export default function Login() {
     const { setUser, setToken } = useStateContext()
 
+    const { showError } = useStateContext()
+
+    const [ error, setError ] = useState({__html: ''})
+
     const emailRef = useRef()
     const passwordRef = useRef()
 
@@ -29,11 +33,7 @@ export default function Login() {
             })
             .catch((error) => {
                 setLoading(false)
-                const response = error.response
-
-                if (response && response.status === 422) {
-                    response.data.errors
-                }
+                showError(error.response.data.error)
             })
     }
     return (
@@ -49,6 +49,7 @@ export default function Login() {
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
+
                         <form onSubmit={onSubmit} className="space-y-6 mt-10" action="#" method="POST">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

@@ -1,5 +1,6 @@
 import {Navigate, Outlet} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider.jsx";
+import ShowError from "./core/ShowError.jsx";
 
 export default function AuthLayout() {
     const { token } = useStateContext()
@@ -19,6 +20,8 @@ export default function AuthLayout() {
                 </div>
 
                 <Outlet />
+
+                <ShowError />
             </div>
         </>
     )

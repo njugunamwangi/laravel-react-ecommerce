@@ -5,6 +5,8 @@ import {useStateContext} from "./contexts/ContextProvider.jsx";
 import Loading from "./components/core/Loading.jsx";
 
 export default function Signup() {
+    const [ error, setError ] = useState({__html: ''})
+
     const nameRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -33,10 +35,9 @@ export default function Signup() {
             })
             .catch((error) => {
                 setLoading(false)
-                const response = error.response
-
-                if (response && response.status === 422) {
-                    response.data.errors
+                if (error.response) {
+                    const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum, ...next  ], [])
+                    setError({__html: finalErrors.join('<br>')})
                 }
             })
     }
@@ -54,6 +55,9 @@ export default function Signup() {
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Sign up for an account
                         </h2>
+
+                        {error.__html && (<div className="bg-red-500 rounded py-2 px-3 text-white" dangerouslySetInnerHTML={error}></div>)}
+
                         <form onSubmit={onSubmit} className="space-y-6 mt-10" action="#" method="POST">
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
