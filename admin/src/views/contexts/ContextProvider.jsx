@@ -7,6 +7,10 @@ const StateContext =  createContext({
         message: null,
         show: false
     },
+    toast: {
+        message: null,
+        show: false
+    },
     setUser: () => {},
     setToken: () => {},
 })
@@ -17,10 +21,19 @@ export const ContextProvider = ({children}) => {
 
     const [ error, setError ] = useState({message: '', show: false})
 
+    const [ toast, setToast ] = useState({message: '', show: false})
+
     const showError = (message) => {
         setError({message, show: true})
         setTimeout(() => {
             setError({message: '', show: false})
+        }, 5000)
+    }
+
+    const showToast = (message) => {
+        setToast({message, show: true})
+        setTimeout(() => {
+            setToast({message: '', show: false})
         }, 5000)
     }
 
@@ -40,7 +53,9 @@ export const ContextProvider = ({children}) => {
             setUser,
             setToken,
             error,
-            showError
+            showError,
+            toast,
+            showToast
         }}>
             {children}
         </StateContext.Provider>
